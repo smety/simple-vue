@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Simple use Vue</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+	<script>
+      window.addEventListener('load', function () {
+          console.log('Init Vue.js');
+          new Vue({
+              el: '#app',
+              data: {
+                  message: 'Hello Vue!'
+              }
+          })
+      });
+	</script>
+</head>
+<body>
+<div id="app">
+	{{ message }}
+</div>
+</body>
+</html>
