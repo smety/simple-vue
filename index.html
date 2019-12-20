@@ -29,6 +29,10 @@
 						Object.keys(developers).forEach(function (key) {
 							developers[key]['visible'] = true;
 						});
+					},
+
+					handleDeleteDeveloper(index) {
+						Vue.delete( this.developers, index);
 					}
 				}
 			});
@@ -48,6 +52,7 @@
 			<td>Name</td>
 			<td>Position</td>
 			<td>Age</td>
+			<td class="text-right">Delete</td>
 		</tr>
 		</thead>
 		<tbody></tbody>
@@ -55,6 +60,7 @@
 			<td>{{ item.name }}</td>
 			<td>{{ item.position }}</td>
 			<td>{{ item.age > 120 ? 'Is death' : item.age }}</td>
+			<td class="text-right"><button class="btn btn-danger" @click.prevent="handleDeleteDeveloper(index)">x</button> </td>
 		</tr>
 		</tbody>
 	</table>
