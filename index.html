@@ -3,22 +3,61 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Simple use Vue</title>
-	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<style>
+		@import "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css";
+	</style>
+
 	<script>
-      window.addEventListener('load', function () {
-          console.log('Init Vue.js');
-          new Vue({
-              el: '#app',
-              data: {
-                  message: 'Hello Vue!'
-              }
-          })
-      });
+		window.addEventListener('load', function () {
+			Vue.config.devtools = true;
+			new Vue({
+				el: '#app',
+				data: {
+					header: 'Developers',
+					developers: [
+						{name: 'Tomas Smetka', position: 'FE developer', age: 29, visible: true},
+						{name: 'Simon Raichl', position: 'Fullstack developer', age: 250, visible: true},
+						{name: 'Marek Hanacek', position: 'Fullstack developer', age: 15, visible: true},
+						{name: 'Fido', position: 'Dog', age: 5, visible: false}
+					]
+				},
+
+				methods: {
+					handleShowAll() {
+						const developers = this.developers;
+						Object.keys(developers).forEach(function (key) {
+							developers[key]['visible'] = true;
+						});
+					}
+				}
+			});
+		});
 	</script>
 </head>
 <body>
-<div id="app">
-	{{ message }}
+<div id="app" class="container">
+	<h1>{{ header }}</h1>
+	<br>
+	<p>List rendering example.</p>
+	<button @click.prevent="handleShowAll()" class="btn btn-primary mb-4">Show all</button>
+	<br>
+	<table class="table">
+		<thead>
+		<tr>
+			<td>Name</td>
+			<td>Position</td>
+			<td>Age</td>
+		</tr>
+		</thead>
+		<tbody></tbody>
+		<tr v-for="(item, index) in developers" v-if="item.visible" :class="{ 'table-danger': item.age > 120 }">
+			<td>{{ item.name }}</td>
+			<td>{{ item.position }}</td>
+			<td>{{ item.age > 120 ? 'Is death' : item.age }}</td>
+		</tr>
+		</tbody>
+	</table>
 </div>
 </body>
 </html>
