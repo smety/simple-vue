@@ -15,6 +15,13 @@
 				el: '#app',
 				data: {
 					header: 'Developers',
+					form: {
+						name: '',
+						position: '',
+						age: 0,
+						visible: true
+					},
+
 					developers: [
 						{name: 'Tomas Smetka', position: 'FE developer', age: 29, visible: true},
 						{name: 'Simon Raichl', position: 'Fullstack developer', age: 250, visible: true},
@@ -33,6 +40,10 @@
 
 					handleDeleteDeveloper(index) {
 						Vue.delete( this.developers, index);
+					},
+
+					submitCreateNewDeveloperForm() {
+						this.developers.push(JSON.parse(JSON.stringify(this.form)))
 					}
 				}
 			});
@@ -64,6 +75,28 @@
 		</tr>
 		</tbody>
 	</table>
+
+	<h2>Create </h2>
+	<form @submit.prevent="submitCreateNewDeveloperForm()">
+		<div class="form-group">
+			<label for="name">Name</label>
+			<input type="text" class="form-control" id="name" v-model="form.name" placeholder="Name">
+		</div>
+
+
+		<div class="form-group">
+			<label for="position">Position</label>
+			<input type="text" class="form-control" id="position" v-model="form.position" placeholder="Position">
+		</div>
+
+
+		<div class="form-group">
+			<label for="age">Age</label>
+			<input type="number" class="form-control" id="age" v-model="form.age" placeholder="Age">
+		</div>
+
+		<button type="submit" class="btn btn-primary">Submit</button>
+	</form>
 </div>
 </body>
 </html>
